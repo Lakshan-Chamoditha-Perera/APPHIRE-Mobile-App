@@ -1,9 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {FlatList, Image, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {useRouter} from "expo-router";
-import axios from "axios";
 import styles from "./welcome.style";
 import {icons} from "../../../constants";
+
+const array = [{
+    id: 1, name: "Region 1",
+}, {
+    id: 2, name: "Region 2",
+}, {
+    id: 3, name: "Region 3",
+},];
 
 const Welcome = () => {
     const router = useRouter();
@@ -11,16 +18,7 @@ const Welcome = () => {
     const [jobRegions, setJobRegions] = useState([]);
 
     useEffect(() => {
-        const fetchJobRegions = async () => {
-            try {
-                const response = await axios.get("https://jobdataapi.com/api/jobregions/");
-                setJobRegions(response.data);
-            } catch (error) {
-                console.error("Error fetching job regions:", error);
-            }
-        };
-
-        fetchJobRegions();
+        setJobRegions(array)
     }, []);
 
     return (<View style={styles.container}>
@@ -52,8 +50,7 @@ const Welcome = () => {
             <FlatList
                 data={jobRegions}
                 keyExtractor={(item) => item.id.toString()}
-                renderItem={({item}) => (
-                    <TouchableOpacity
+                renderItem={({item}) => (<TouchableOpacity
                     style={styles.tab(activeJobType === item.name)}
                     onPress={() => {
                         setActiveJobType(item.name);
