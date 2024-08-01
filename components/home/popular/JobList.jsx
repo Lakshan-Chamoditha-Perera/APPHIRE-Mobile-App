@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, Text, TouchableOpacity, View} from 'react-native';
 import {useRouter} from 'expo-router';
 import styles from './Joblist.style';
-import axios from "axios";
-import JobCard from "../../common/cards/JobCard";
-import {SIZES} from "../../../constants";
+import axios from 'axios';
+import JobCard from '../../common/cards/JobCard';
+import {SIZES} from '../../../constants';
 
 const JobList = () => {
     const router = useRouter();
@@ -31,9 +31,11 @@ const JobList = () => {
     }, []);
 
     const handleShowAll = () => {
-       if(showAll){
-           setDisplayedJobs(allJobs);
-       }
+        if (showAll) {
+            setDisplayedJobs(allJobs.slice(0, 5)); // Show only the first 5 jobs if not showing all
+        } else {
+            setDisplayedJobs(allJobs); // Show all jobs
+        }
         setShowAll(!showAll);
     };
 
@@ -43,20 +45,26 @@ const JobList = () => {
             </View>);
     }
 
+    if (error) {
+        return (<View style={styles.container}>
+                <Text>Error fetching jobs. Please try again later.</Text>
+            </View>);
+    }
+
     return (<View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>Popular Jobs</Text>
-                <TouchableOpacity onPress={handleShowAll}>
-                    <Text style={styles.headerBtn}>{showAll ? 'Show Less' : 'Show All'}</Text>
+                <TouchableOpacity onPress={handleShowAll} style={styles.button}>
+                    <Text style={styles.buttonText}>{showAll ? 'Show Less' : 'Show All'}</Text>
                 </TouchableOpacity>
             </View>
 
             <FlatList
+                contentContainerStyle={{columnGap: SIZES.medium}}
+                showsHorizontalScrollIndicator={false}
                 data={displayedJobs}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}) => <JobCard job={item}/>}
-                contentContainerStyle={{columnGap: SIZES.medium}} // Adjust spacing between cards
-                showsHorizontalScrollIndicator={false} // Hide scroll indicator
             />
         </View>);
 };
