@@ -32,8 +32,9 @@ const CompanyList = () => {
         return <Text style={{color: 'red'}}>{error}</Text>; // Simple error display
     }
 
-    return (<View>
-            <Text style={{fontSize: 20, fontWeight: 'bold', margin: 10}}>Companies</Text>
+    return (
+        <View>
+            <Text style={{fontSize: 20, fontWeight: 'bold', margin: 10}}>Top Companies</Text>
             <ScrollView horizontal contentContainerStyle={{paddingHorizontal: 10}}>
                 {companies.map(company => (<CompanyCard key={company.id} company={company}/>))}
             </ScrollView>

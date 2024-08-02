@@ -31,9 +31,9 @@ const Home = () => {
             }}>
                 <Welcome/>
 
+                <CompanyList/>
                 <JobList/>
 
-                <CompanyList/>
 
             </View>
         </ScrollView>
