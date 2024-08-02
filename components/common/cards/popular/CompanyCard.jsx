@@ -51,13 +51,7 @@ const styles = StyleSheet.create({
     }, name: {
         fontSize: 16, fontWeight: 'bold', color: '#1f2937', marginBottom: 10,
     }, socialIcons: {
-        // borderColor: '#e5e7eb',
-        // borderWidth: 1,
-        // borderRadius: 5,
-        width:120,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        // marginBottom: 10,
+        width: 120, flexDirection: 'row', justifyContent: 'space-evenly',
     }, description: {
         fontSize: 14, color: '#6b7280', textAlign: 'center', marginBottom: 10,
     }, id: {

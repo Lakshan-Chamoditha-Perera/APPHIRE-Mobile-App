@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
+import {ActivityIndicator, Alert, ScrollView, Text, View} from 'react-native';
 import axios from 'axios';
 import CompanyCard from '../../common/cards/popular/CompanyCard';
 
@@ -15,7 +15,7 @@ const CompanyList = () => {
                 setCompanies(response.data);
             } catch (err) {
                 setError(err.message);
-                console.error("Error fetching company data:", err);
+                Alert.alert('Error', 'Error fetching companies. Please try again later.');
             } finally {
                 setIsLoading(false);
             }
@@ -32,13 +32,12 @@ const CompanyList = () => {
         return <Text style={{color: 'red'}}>{error}</Text>; // Simple error display
     }
 
-    return (
-        <View>
-            <Text style={{fontSize: 20, fontWeight: 'bold', margin: 10}}>Top Companies</Text>
-            <ScrollView horizontal contentContainerStyle={{paddingHorizontal: 10}}>
-                {companies.map(company => (<CompanyCard key={company.id} company={company}/>))}
-            </ScrollView>
-        </View>);
+    return (<View>
+        <Text style={{fontSize: 20, fontWeight: 'bold', margin: 10}}>Top Companies</Text>
+        <ScrollView horizontal contentContainerStyle={{paddingHorizontal: 10}}>
+            {companies.map(company => (<CompanyCard key={company.id} company={company}/>))}
+        </ScrollView>
+    </View>);
 };
 
 export default CompanyList;

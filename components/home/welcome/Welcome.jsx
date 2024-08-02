@@ -28,6 +28,7 @@ const Welcome = () => {
             <View style={styles.searchWrapper}>
                 <TextInput
                     onChange={() => {
+
                     }}
                     style={styles.searchInput}
                     value=""
@@ -53,8 +54,7 @@ const Welcome = () => {
                 renderItem={({item}) => (<TouchableOpacity
                     style={styles.tab(activeJobType === item.name)}
                     onPress={() => {
-                        setActiveJobType(item.name);
-                        router.push(`/search/${item.name}`);
+
                     }}
                 >
                     <Text style={activeJobType === item.name ? styles.activeText : null}>

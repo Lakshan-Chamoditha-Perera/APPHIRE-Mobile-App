@@ -10,5 +10,4 @@ import JobCard from "./common/cards/JobCard";
 
 export {
     ScreenHeaderBtn, Welcome, JobList, NearbyJobCard, JobCard, CompanyList
-
 };

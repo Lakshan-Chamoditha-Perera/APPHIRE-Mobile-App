@@ -1,11 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, Alert, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {useRouter} from 'expo-router';
 import styles from './Joblist.style';
 import axios from 'axios';
 import JobCard from '../../common/cards/JobCard';
-import {SIZES} from '../../../constants';
-import CompanyCard from "../../common/cards/popular/CompanyCard";
 
 const JobList = () => {
     const router = useRouter();
@@ -22,7 +20,7 @@ const JobList = () => {
                 setAllJobs(response.data);
                 setDisplayedJobs(response.data.slice(0, 5));
             } catch (err) {
-                console.error('Error fetching jobs:', err);
+                Alert.alert('Error', 'Error fetching jobs. Please try again later.');
                 setError(true);
             } finally {
                 setIsLoading(false);
@@ -33,9 +31,9 @@ const JobList = () => {
 
     const handleShowAll = useCallback(() => {
         if (showAll) {
-            setDisplayedJobs(allJobs.slice(0, 5)); // Show only the first 5 jobs if not showing all
+            setDisplayedJobs(allJobs.slice(0, 5));
         } else {
-            setDisplayedJobs(allJobs); // Show all jobs
+            setDisplayedJobs(allJobs);
         }
         setShowAll(!showAll);
     }, [showAll, allJobs]);
